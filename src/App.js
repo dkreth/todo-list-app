@@ -6,27 +6,33 @@ import Header from "./components/layout/Header";
 import AddTodo from "./components/AddTodo";
 import About from "./components/pages/About"
 import uuid from "uuid";
+import axios from 'axios'
 
 class App extends Component {
   state = {
     todos: [
-      {
-        id: uuid.v4(),
-        title: "Take out the trash",
-        completed: false
-      },
-      {
-        id: uuid.v4(),
-        title: "Dinner with Jules",
-        completed: false
-      },
-      {
-        id: uuid.v4(),
-        title: "Meeting with Mandie",
-        completed: false
-      }
+      // {
+      //   id: uuid.v4(),
+      //   title: "Take out the trash",
+      //   completed: false
+      // },
+      // {
+      //   id: uuid.v4(),
+      //   title: "Dinner with Jules",
+      //   completed: false
+      // },
+      // {
+      //   id: uuid.v4(),
+      //   title: "Meeting with Mandie",
+      //   completed: false
+      // }
     ]
   };
+
+  componentDidMount() {
+    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+    .then(response => this.setState({ todos: response.data}))
+  }
 
   markComplete = id => {
     //mark the todo as complete
